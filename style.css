@@ -1,0 +1,65 @@
+body{
+    margin:0;
+    font-family:"Montserrat",sans-serif;
+    background-color: #b79730;
+}
+
+h1 {
+    text-align: center ;
+}
+
+.imageblock {
+    width:800px ;
+    height:600px ;
+    
+}
+
+.imageblock img{
+    object-fit: contain;
+    width:90% ;
+    
+}
+
+.toplevel{
+    display: flex ;
+    align-content: center ;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.inputblock{
+    width: 250px ;
+    height: 420px ;
+    border: .5rem outset blue ;
+    border-radius: 10px;
+    padding: 1.5rem ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+input {
+    width: 60% ;
+    font-size : 1.1rem ;
+    padding: .2rem ;
+}
+
+
+#numberfield {
+    font-size: 3rem ;
+}
+
+#startButton {
+    font-size: 1.5rem ;
+    background-color: bisque;
+    border-radius: 10px;
+    padding: .5rem ;
+}
+
+.formButton {
+    font-size: 1.5rem ;
+    background-color: bisque;
+    border-radius: 10px;
+    padding: .5rem ;
+
+}
