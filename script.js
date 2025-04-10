@@ -59,7 +59,7 @@ function getGuess(){
         `<audio id="myAudio">
             <source src="rooster_crow.mp3" type="audio/mpeg">
         </audio>
-        <h2>Sorry<h2> 
+        <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXVyb3VvMHoxb25zZGZwZnVqbzRuMzg3aDBybHp1YzZ2eWt3Z2xucCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/yhab3ESWEhJNCyBzH2/giphy.gif" alt="chicken.gif" style="width:256px;height:256px;"/> 
         <h3>See you later</h3>
         <Button class="formButton" onclick="playAgain()">Play Again</Button
         `;
@@ -71,7 +71,8 @@ function getGuess(){
         <audio id="myAudio">
             <source src="rooster_crow.mp3" type="audio/mpeg">
         </audio>
-        <h2>Correct</h2>
+        <img src="https://media.giphy.com/media/fPIo1tm5fokxy/giphy.gif?cid=ecf05e474615xenk30smgbbcn2l2r4z7z7mg5zcdl4ssrprl&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="chicken.gif" style="width:256px;height:220px;"/> 
+        <h2>Congrats, you get free parking</h2>
         <h3>See you later</h3>
         <Button class="formButton" onclick="playAgain()">Play Again</Button>
         `;
