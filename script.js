@@ -1,32 +1,69 @@
 let number
 let totalSeconds = 8 ;
-let numroosters = 7 ;
+let numroosters = 2 ;
 let secondsRemaining ;
 let intervalID ;
 
 let numberText = document.getElementById("numberfield") ;
 let chicken_img = document.getElementById("chickenImg") ;
 let inputblock = document.querySelector(".inputblock") ;
+let imageArr=[] ;
+let imageCounts=[] ;
+let currentJPG = "images/chicken_7.jpg" ;
 
 numberText.innerHTML = totalSeconds ;
 
 
+
+
+function getFiles() {
+    let i=0 ;
+    $ajaxUtils.sendGetRequest ('images/images.txt', function(responseText){
+            //Split the csv into rows
+        const rows = responseText.split('\n');
+        for (row of rows) {
+                //Split the row into each of the comma separated values
+                let cols = row.split(',') ;
+                if(cols[0].length < 5) {
+                    continue ;
+                }
+                imageArr.push (cols[0]) ;
+                imageCounts.push (cols[1]) ;
+        }
+
+    }, false) ;
+    document.getElementById("loadButton").classList.remove("loadNew") ;
+    return 0 ;
+} 
+
+
+function loadNew () {
+
+    // use getImage to select random image from stack and load numroosters
+    let thisRun = getImage() ;
+    currentJPG = thisRun[0] ;
+    numroosters = Number(thisRun[1]) ;
+    secondsRemaining = totalSeconds ;
+    document.getElementById("loadButton").classList.add("loadNew") ;
+
+}
 function startCountdown () {
 
+    // use getImage to select random image from stack and load numroosters
     secondsRemaining = totalSeconds ;
     intervalID = setInterval (ticktock, 1000) ;
 
 }
 
 function ticktock () {
+    console.log("in ticktock") ;
     if (secondsRemaining==totalSeconds){
-        chicken_img.src = "chicken_7.jpg" ;
+        chicken_img.src = currentJPG ;
         
     }
-    totalSeconds -= 1 ;
-    console.log(totalSeconds) ;
-    numberText.innerHTML= totalSeconds ;
-    if (totalSeconds<=0){
+    secondsRemaining -= 1 ;
+    document.getElementById("numberfield").innerHTML=`${secondsRemaining} s` ;
+    if (secondsRemaining<=0){
         clearInterval(intervalID) ;
         chicken_img.src = "rooster.jpg" ;
         loadForm() ;
@@ -39,8 +76,9 @@ function ticktock () {
 function loadForm () {
     
     inputblock.innerHTML =
-        `<h2>Your Guess</h2>
+        `<h2>How Many Chickens?</h2>
         <form >
+        <label>Your Guess</label>
         <input type="number" id="howMany" name="howMany" value=0><br><br>
         <input type="submit" value="Submit" onclick="getGuess()">
         </form > `;
@@ -49,11 +87,8 @@ function loadForm () {
 }
 
 function getGuess(){
-    console.log("You are in get guess");
     let guessID = document.getElementById("howMany") ;
     let varguess = guessID.value ;
-
-    console.log("You are in get guess", varguess);
     if (varguess != numroosters){
         inputblock.innerHTML =
         `<audio id="myAudio">
@@ -88,5 +123,24 @@ function getGuess(){
 }
 
 function playAgain(){
-    window.location.reload() ;
+    inputblock.innerHTML =
+    `<div class="numberblock">
+                    <h2>Seconds Remaining</h2>
+                    <h3 id="numberfield">${totalSeconds} s</h3>
+                    <button class="startButton" id="loadButton" onclick="loadNew()">Load New Photo</button>
+                    <button class="startButton" id="startButton" onclick="startCountdown()">Start Countdown</button>
+                    
+    </div>` ;
 }
+
+function getImage (){
+    let numImages = imageArr.length ;
+    let randimage = Math.floor(Math.random() * numImages) ;
+    if (randimage >= numImages) {
+        randimage = numImages - 1 ;
+    }
+    console.log(randimage, imageArr[randimage]) ;
+    return ([imageArr[randimage],imageCounts[randimage]]) ;
+}
+
+getFiles() ;

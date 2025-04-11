@@ -1,0 +1,5 @@
+images/20250410_075706.jpg,3
+images/20250410_075708.jpg,2
+images/20250410_075726.jpg,5
+images/IMG_5592.jpg,1
+images/chicken_7.jpg,2
